@@ -1,3 +1,7 @@
+# takes in the matrix of processed data as 1st argument
+# metadata file as 2nd argument
+# plots a pca plot
+
 import numpy
 import sys
 import matplotlib
@@ -30,9 +34,7 @@ with open(sys.argv[1]) as f:
 print len(columns)
 
 
-	
-# took out len(columns)
-data = numpy.loadtxt(sys.argv[1], delimiter="\t", skiprows=2, usecols=range(1,10))
+data = numpy.loadtxt(sys.argv[1], delimiter="\t", skiprows=2, usecols=range(1,len(columns)))
 
 print data[1:10, 1:10]
 
@@ -72,5 +74,7 @@ def pcaplot(dim1=0,dim2=1, outputfile=None):
 	else:
 		plt.show()	
 			
-pcaplot(outputfile="plots/pcaplot.png")
+pcaplot(outputfile="plots/pcaplot_1st_2nd.png")
+
+pcaplot(dim1=1, dim2=2, outputfile="plots/pcaplot_2nd_3rd.png")
 

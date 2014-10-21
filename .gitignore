@@ -4,3 +4,4 @@ plots/
 supp materials/
 test*
 column_metadata.txt
+*.log

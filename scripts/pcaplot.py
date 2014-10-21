@@ -31,17 +31,17 @@ with open(sys.argv[1]) as f:
 	columns = content.split("\t")
 	del columns[0]
 
-print len(columns)
-
-
+print "Reading in data matrix"
 data = numpy.loadtxt(sys.argv[1], delimiter="\t", skiprows=2, usecols=range(1,len(columns)))
 
-print data[1:10, 1:10]
-
 covariance = numpy.cov(data)
-print "hello"
+
+print "Calculating Eigenvectors"
 w, v = LA.eigh(covariance)	
-print covariance.shape
+
+print "Saving Eigenvectors to file"
+numpy.savetxt(w, "eigenweights.tsv")
+numpy.savetxt(v, "eigenvectors.tsv")
 
 eigenpairs = zip(w, v)
 eigenpairs.sort()
@@ -74,6 +74,7 @@ def pcaplot(dim1=0,dim2=1, outputfile=None):
 	else:
 		plt.show()	
 			
+print "Working on PCA plots"
 pcaplot(outputfile="plots/pcaplot_1st_2nd.png")
 
 pcaplot(dim1=1, dim2=2, outputfile="plots/pcaplot_2nd_3rd.png")
